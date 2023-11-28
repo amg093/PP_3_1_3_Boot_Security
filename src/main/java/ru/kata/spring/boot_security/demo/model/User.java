@@ -109,9 +109,8 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(role -> new Role(role.getAuthority()))
-                .collect(Collectors.toList());
+        Set<Role> roles = getRoles();
+        return new HashSet<GrantedAuthority>(roles);
     }
 
     @Override
